@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<title>Document</title>
+<style type="text/css">
+.wrap {
+width: 400px;
+margin: 30px auto;
+}
+
+
+span {
+
+}
+
+textarea {
+display: block;
+width: 100%;
+height: 60px;
+}
+input {
+display: block;
+width: 20%;
+padding: 6px;
+margin: 0px 20% 15px 80%;
+background: rgb(170, 213, 216);
+border-radius: 2px;
+font-size: 15px;
+border-style: none;
+cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+
+}
+#comment:hover{
+    background: #a1b8b9;
+}
+li {
+padding: 5px 10px;
+position: relative;
+word-break: break-all;
+}
+.red {
+color: #000;
+background: #babcbe;
+} 
+.pink {
+color: #000;
+background: rgb(170, 213, 216);
+}
+a {
+position: absolute;
+right: 0;
+top: -20px;
+background: yellow;
+color: #fff;
+} 
+#list {
+margin: 0;
+padding: 0;
+list-style: none;
+font: 14px/26px "宋體";
+}
+.ShowTime{
+    float:right;
+    font-size: 0.1em;
+}
+.clos {
+position: absolute;
+top: 0;
+right: -50px;
+width: 50px;
+color: #fff;
+background: #000;
+padding: 5px 0;
+text-decoration: none;
+text-align: center;
+}
+.clos:hover {
+box-shadow: 0 0 5px rgba(0,0,0,.5)
+}
+
+
+
+@media screen and (max-width: 320px) {
+    .wrap{
+        width: 100%;
+    }
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+var btn = document.querySelector('input');
+var text = document.querySelector('textarea');
+var list = document.querySelector('#list');
+var colors = ["red","pink"];
+var nub = 0;
+btn.onclick = function(){ //空白提醒
+if(text.value.trim() == ""){
+    alert("你的輸入欄位不能空白");
+    return false;
+}
+var Today=new Date();
+var h=Today.getHours();
+var m=Today.getMinutes();
+var s=Today.getSeconds();　
+var li = document.createElement("li");//新增輸入文字入Li
+li.innerHTML = text.value+"<span class=ShowTime>"+Today.getFullYear()+"."+(Today.getMonth()+1)+"."+Today.getDate()+"&nbsp&nbsp&nbsp&nbsp&nbsp"+h+":"+m+":"+s+"</span>";
+
+if(list.children[0] && list.children[0].className=="red"){ //第一個是紅red calss 二pink class
+    li.className = "pink";
+}else {
+    li.className = "red";
+}
+
+
+var a = null;
+li.onmouseover = function()//滑鼠指到LI 出現刪除
+{
+    if(a){
+        a.style.display = "block";
+    }else{
+        a = document.createElement("a");
+        a.href = "javascript:;";
+        a.className = "clos";
+        a.innerHTML = "刪除";
+        a.onclick = function (){
+            list.removeChild(this.parentNode);
+        };
+        this.appendChild(a);
+    }
+};
+    li.onmouseout = function(){//刪除消失
+        a.style.display = "none";
+    };
+    list.insertBefore(li,list.children[0]);
+    text.value = "";//輸入完後清空
+    nub;
+    console.log(nub);
+};
+}; 
+</script>
+</head>
+<body>
+<div>
+<div class="wrap row">
+<textarea id="text"class="col-md-12" placeholder="想對我說什麼?"></textarea>
+<input type="button" value="留言" id="comment">
+<ul id="list"></ul>
+</div> 
+</body>
+</html>
